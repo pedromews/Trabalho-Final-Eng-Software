@@ -7,7 +7,7 @@ body {
 }
 
 header {
-    background-color: blueviolet;
+    background-color: grey;
     padding: 10px;
     color: #fff;
     text-align: center;
@@ -38,13 +38,13 @@ button {
     border: 0px;
     padding: 10px;
     outline: 0;
-    background-color: blueviolet;
+    background-color: gray;
     color: #fff;
     border-radius: 3px;
 }
 
 button:hover {
-    background-color: rgb(102, 31, 168);
+    background-color: rgb(156, 156, 156);
 }
 
 .content {
