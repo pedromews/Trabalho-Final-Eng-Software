@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Browse Services</title>
+    <link rel="stylesheet" href="browse.css" />
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="../index/index.html">Home</a></li>
+        <li><a href="browse.html">Browse Services</a></li>
+        <li><a href="../post/post.html">Post a Service</a></li>
+        <li><a href="../login/login.html" class="login-button">Login</a></li>
+      </ul>
+    </nav>
+    <header>
+      <h1>Browse Services</h1>
+    </header>
+    <div class="services-container">
+      <script src="services.json"></script>
+      <template id="service-template">
+        <div class="service">
+          <h2 class="service-title"></h2>
+          <p class="service-author"></p>
+          <p class="service-description"></p>
+          <p class="service-price"></p>
+        </div>
+      </template>
+    </div>
+    <footer>
+        <p>Marketplace Website &copy; 2023</p>
+      </footer>
+    <script src="browse.js"></script>
+  </body>
+</html>
