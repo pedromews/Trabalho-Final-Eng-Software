@@ -149,29 +149,6 @@ nav ul li a {
   margin-top: 20px;
 }
 
-/* How It Works Styles */
-
-.how-it-works {
-  padding: 50px 0;
-  background-color: #f2f2f2;
-}
-
-.how-it-works h2 {
-  font-size: 36px;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.how-it-works ol {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.how-it-works li {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
 /* Footer Styles */
 
 footer {
