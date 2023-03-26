@@ -22,7 +22,7 @@ a {
 
 button {
   display: block;
-  margin: 0 auto;
+  width: 100%;
   background-color: #2196F3;
   border: none;
   color: white;
@@ -110,6 +110,16 @@ textarea {
 
 .hidden {
   display: none;
+}
+
+.radio-options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-options label {
+  margin-right: 20px;
 }
 
 /* Footer Styles */

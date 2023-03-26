@@ -36,8 +36,21 @@
             </div>
 
             <div class="form-group">
-              <label for="price">Price:</label>
+              <label for="price">Price (in FriendCoins):</label>
               <input type="number" id="price" name="price" required>
+            </div>
+
+            <div class="form-group">
+              <div class="radio-options">
+                <label class="radio-label">
+                  <input type="radio" name="type" value="offer" />
+                  <span class="radio-btn">Offer</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="type" value="request" />
+                  <span class="radio-btn">Request</span>
+                </label>
+              </div>
             </div>
 
             <button type="submit" class="btn">Post</button>
