@@ -15,7 +15,12 @@ const routes = require("./routes/router");
 
 app.use("/api", routes);
 
-app.listen(3000, function ()
+app.listen(8080, function ()
 {
     console.log("Server online!");
 })
+
+app.use(cors({
+    origin: 'http://localhost:8080'
+}));
+  
