@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="profile.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="../index/index.html">Home</a></li>
+          <li><a href="../browse/browse.html">Browse Services</a></li>
+          <li><a href="../post/post.html">Post a Service</a></li>
+          <li><a href="../login/login.html" class="login-button">Login</a></li>
+          <li><a href="profile.html" class="profile-button">Profile</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="profile-header">
+        <div class="profile-info">
+          <img class="profile-pic" src="res/profile-pic1.png" alt="Profile Picture">
+          <h1>John Doe</h1>
+        </div>
+
+		<div class="profile-b">
+			<nav class="profile-nav">
+				<ul>
+				  <li><href="#" onclick="showSection('posts')">Posts</href></li>
+				  <li><href="#" onclick="showSection('ratings')">Ratings</href></li>
+				  <li><href="#" onclick="showSection('contacts')">Contacts</href></li>
+				</ul>
+			</nav>
+
+			<div class="balance-container">
+				<span class="balance-label">Balance:</span>
+				<span class="balance">₣ᑕ100</span>
+				<div class="recharge-container">
+					<button class="recharge-button">Recharge</button>
+				</div>
+			</div>
+		</div>
+		
+      </div>
+
+      <div class="profile-content">
+		<div id="posts" class="profile-section">
+			<h2>Posts</h2>
+			<!-- Here goes the content of the posts section -->
+			<div class="post">
+			  <h3>Offering Dog Walking Services</h3>
+			  <div class="post-info">
+				<p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget metus ullamcorper, finibus metus sed, laoreet quam. Sed feugiat ex vel neque posuere, ac euismod sem accumsan. Praesent eget gravida massa. Nulla facilisi. Integer efficitur velit quis ipsum hendrerit, id pharetra nibh sollicitudin.</p>
+				<p>Price: $10</p>
+			  </div>
+			  <button href="#">View Details</button>
+			</div>
+		
+			<div class="post">
+			  <h3>Looking for a Babysitter</h3>
+			  <div class="post-info">
+				<p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget metus ullamcorper, finibus metus sed, laoreet quam. Sed feugiat ex vel neque posuere, ac euismod sem accumsan. Praesent eget gravida massa. Nulla facilisi. Integer efficitur velit quis ipsum hendrerit, id pharetra nibh sollicitudin.</p>
+				<p>Price: $20</p>
+			  </div>
+			  <button href="#">View Details</button>
+			</div>
+		</div>
+
+        <div id="ratings" class="profile-section" style="display:none">
+		  <h2>Ratings</h2>
+          <!-- Here goes the content of the ratings section -->
+		  <div class="rating">
+			<h3>Great Service!</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget metus ullamcorper, finibus metus sed, laoreet quam. Sed feugiat ex vel neque posuere, ac euismod sem accumsan. Praesent eget gravida massa. Nulla facilisi. Integer efficitur velit quis ipsum hendrerit, id pharetra nibh sollicitudin.</p>
+		  </div>
+	  
+		  <div class="rating">
+			<h3>Very Professional</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget metus ullamcorper, finibus metus sed, laoreet quam. Sed feugiat ex vel neque posuere, ac euismod sem accumsan. Praesent eget gravida massa. Nulla facilisi. Integer efficitur velit quis ipsum hendrerit, id pharetra nibh sollicitudin.</p>
+		  </div>
+        </div>
+
+        <div id="contacts" class="profile-section" style="display:none">
+		  <h2>Contacts</h2>
+          <!-- Here goes the content of the contacts section -->
+		  <ul class="contact-list">
+			<li>Email: john.doe@email.com</li>
+			<li>Phone: 555-555-5555</li>
+			<li>Address: 123 Main Street, Anytown USA</li>
+		  </ul>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Marketplace Website &copy; 2023</p>
+    </footer>
+
+    <script src="profile.js"></script>
+  </body>
+</html>

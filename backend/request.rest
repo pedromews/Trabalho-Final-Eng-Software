@@ -1,0 +1,59 @@
+POST http://localhost:3000/api/services
+Content-Type: application/json
+
+{
+    "title": "Some service 22222",
+    "author": "fdc",
+    "description": "Some description",
+    "price": 800,
+    "type": 1
+}
+
+###
+GET http://localhost:3000/api/services
+
+###
+GET http://localhost:3000/api/services/641f3ba58c27964bd72dd470
+
+###
+DELETE http://localhost:3000/api/services/641f3ca744bebd9534d2594e
+
+###
+PUT http://localhost:3000/api/services/641f529f0e90e033142b8c64
+Content-Type: application/json
+
+{
+    "title": "Update test",
+    "author": "Pedro Mews",
+    "description": "Some description",
+    "price": 1000,
+    "type": 2
+}
+
+// -------------------------------------
+
+###
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+    "username": "tonitodos_informatica",
+    "email": "arthur@gmail.com",
+    "password": "password",
+    "firstName": "Arthur",
+    "lastName": "Tonial Tonitodos Informática",
+    "profilePicture": "https://i.imgur.com/lbIV1hD.jpg",
+    "services": [],
+    "balance": 0
+}
+
+###
+GET http://localhost:3000/api/users
+
+###
+PUT http://localhost:3000/api/users/64208052a5c643aaca9a0016
+Content-Type: application/json
+
+{
+    "profilePicture": "https://imgur.com/a/TuOCgQM.jpg"
+}

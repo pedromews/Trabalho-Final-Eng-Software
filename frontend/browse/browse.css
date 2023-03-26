@@ -21,17 +21,13 @@ a {
 }
 
 button {
-  display: block;
-  margin: 0 auto;
   background-color: #2196F3;
+  color: #fff;
   border: none;
-  color: white;
+  border-radius: 5px;
   padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -61,55 +57,46 @@ nav ul li a {
   font-weight: bold;
 }
 
-.container {
+.services-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  height: 100%;
+  gap: 2rem;
 }
 
-.form-container {
-  width: 600px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-container h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="number"],
-textarea {
-  width: 96%;
-  padding: 10px;
+.service {
   border: 1px solid #ccc;
-  border-radius: 4px;
-  font-family: 'Roboto', sans-serif;
+  border-radius: 0.5rem;
+  width: 30rem;
+  padding: 1rem;
 }
 
-textarea {
-  resize: none;
+.service-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
-.hidden {
-  display: none;
+.service-author {
+  font-size: 0.8rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.service-description {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  height: 6rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.service-price {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 /* Footer Styles */
@@ -117,9 +104,9 @@ textarea {
 footer {
   background-color: #333;
   color: #fff;
-  padding: 20px 0 20px;
+  padding: 5px 0 5px;
   text-align: center;
-
+  
   width: 100%;
   position: absolute;
   bottom: 0;
