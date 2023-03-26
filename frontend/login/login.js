@@ -14,7 +14,6 @@ const profilePicture = document.querySelector(".signup-profile-picture");
 
 // Add event listener to "Sign Up" link
 signupLink.addEventListener("click", () => {
-  console.log("fdc");
   // Hide login form
   loginContainer.style.display = "none";
   // Show signup form

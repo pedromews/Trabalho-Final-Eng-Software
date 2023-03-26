@@ -1,19 +1,21 @@
-const serviceTemplate = document.querySelector('#service-template');
-const servicesContainer = document.querySelector('.services-container');
-
-fetch('../services.json')
+fetch('/api/services')
   .then(response => response.json())
   .then(services => {
+    // Iterate through the services and add them to the HTML
+    const servicesContainer = document.querySelector('.services');
     services.forEach(service => {
-      const serviceElement = document.importNode(serviceTemplate.content, true);
-
-      serviceElement.querySelector('.service-title').textContent = service.title;
-      serviceElement.querySelector('.service-author').textContent = `By ${service.author}`;
-      serviceElement.querySelector('.service-description').textContent = service.description;
-      serviceElement.querySelector('.service-price').textContent = `$${service.price}`;
-
+      const serviceElement = document.createElement('div');
+      serviceElement.className = 'service';
+      serviceElement.innerHTML = `
+        <h3 class="service-title">${service.title}</h3>
+        <p class="service-author">${service.author}</p>
+        <p class="service-description">${service.description}</p>
+        <p class="service-price">$${service.price}</p>
+        <p class="service-type">${service.type}</p>
+      `;
       servicesContainer.appendChild(serviceElement);
     });
   })
-  .catch(error => console.log(error));
-
+  .catch(error => {
+    console.error('Error fetching services:', error);
+  });

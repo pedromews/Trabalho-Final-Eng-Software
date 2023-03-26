@@ -8,28 +8,31 @@
   </head>
   <body>
     <header>
-        <nav>
-            <ul>
-              <li><a href="../index/index.html">Home</a></li>
-              <li><a href="../browse/browse.html">Browse Services</a></li>
-              <li><a href="../post/post.html">Post a Service</a></li>
-              <li><a href="login.html" class="login-button" >Login</a></li>
-              <li><a href="../profile/profile.html" class="profile-button">Profile</a></li>
-            </ul>
-          </nav>
+      <nav>
+        <ul>
+          <li><a href="../index/index.html">Home</a></li>
+          <li><a href="../browse/browse.html">Browse Services</a></li>
+          <li><a href="../post/post.html">Post a Service</a></li>
+          <li><a href="login.html" class="login-button">Login</a></li>
+          <li><a href="../profile/profile.html">Profile</a></li>
+          <li><a href="../yourservices/yourservices.html">Your Services</a></li>
+        </ul>
+      </nav>
     </header>
     <main>
+
       <div class="login-container">
         <h2>Login</h2>
         <form>
-          <label for="email-or-username">Email or username</label>
-          <input type="text" id="email-or-username" name="email-or-username" required>
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required>
           <label for="password">Password</label>
           <input type="password" id="password" name="password" required>
           <button type="submit">Login</button>
         </form>
         <p>Don't have an account? <a href="#" class="signup-link">Sign up</a></p>
       </div>
+
       <div class="signup-container">
         <h2>Sign up</h2>
         <form>
@@ -49,6 +52,7 @@
         </form>
         <p>Already have an account? <a href="#" class="login-link">Login</a></p>
       </div>
+      
     </main>
     <footer>
       <p>Marketplace Website &copy; 2023</p>

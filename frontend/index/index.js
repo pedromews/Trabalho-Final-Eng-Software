@@ -1,5 +1,3 @@
-//import api from '../../backend'
-
 const form = document.getElementById('post-form');
 const successMessage = document.getElementById('success-message');
 

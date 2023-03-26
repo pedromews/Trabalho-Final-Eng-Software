@@ -94,7 +94,6 @@ main {
 .profile-content {
   border: 1px solid #ccc;
   padding: 20px;
-  max-height: 300px;
   overflow-y: auto;
 }
 
@@ -210,12 +209,12 @@ main {
 /* Footer Styles */
 
 footer {
-background-color: #333;
-color: #fff;
-padding: 5px 0 5px;
-text-align: center;
-
-width: 100%;
-position: absolute;
-bottom: 0;
+  background-color: #333;
+  color: #fff;
+  padding: 5px 0 5px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
