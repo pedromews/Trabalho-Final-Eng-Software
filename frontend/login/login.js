@@ -118,7 +118,7 @@ function signup(event) {
 
     console.log("loguei no sign in");
 
-    sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+    localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
   }
 }
 
@@ -155,7 +155,7 @@ function login(event) {
         userExists = true;
         console.log("loguei no login");
         loggedInUser = user;
-        sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+        localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
         console.log(loggedInUser);
         return;
       }

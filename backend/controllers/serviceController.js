@@ -10,13 +10,13 @@ const serviceController =
             const service =
             {
                 title: req.body.title,
-                author: "teste",
+                author: req.body.author,
                 description: req.body.description,
                 price: req.body.price,
                 type: req.body.type,
             };
 
-            const user = await UserModel.findOne({ username: "teste" });
+            const user = await UserModel.findOne({ username: req.body.author });
 
             if (!user) {
                 res.status(404).json({ msg: "Author not found." });

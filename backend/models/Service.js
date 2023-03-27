@@ -9,7 +9,7 @@ const serviceSchema = new Schema
         author: { type: String, required: true },
         description: { type: String, required: true },
         price: { type: Number, required: true },
-        type: { type: Number, required: true },
+        type: { type: String, required: true },
     },
 
     { timestamps: true }

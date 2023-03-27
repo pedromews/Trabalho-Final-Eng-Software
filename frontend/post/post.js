@@ -3,7 +3,7 @@
 const form = document.getElementById('post-form');
 const successMessage = document.getElementById('success-message');
 
-let loggedInUser = sessionStorage.getItem('loggedInUser');
+let loggedInUser = localStorage.getItem('loggedInUser');
 if (loggedInUser) {
   console.log("estou parseando " + loggedInUser);
   loggedInUser = JSON.parse(loggedInUser);
@@ -61,6 +61,7 @@ function postService(event) {
   
   const formData = {
     title: form.title.value,
+    author: loggedInUser.username,
     description: form.description.value,
     price: form.price.value,
     type: form.type.value,
