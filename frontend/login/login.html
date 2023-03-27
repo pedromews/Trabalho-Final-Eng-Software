@@ -8,16 +8,17 @@
   </head>
   <body>
     <header>
-        <nav>
-            <ul>
-              <li><a href="../index/index.html">Home</a></li>
-              <li><a href="../browse/browse.html">Browse Services</a></li>
-              <li><a href="../post/post.html">Post a Service</a></li>
-              <li><a href="login.html" class="login-button">Login</a></li>
-              <li><a href="../profile/profile.html" class="profile-button">Profile</a></li>
-              <li><a href="../yourservices/yourservices.html">Your Services</a></li>
-            </ul>
-          </nav>
+      <nav>
+        <ul>
+          <li><a href="../index/index.html">Home</a></li>
+          <li><a href="../browse/browse.html">Browse Services</a></li>
+          <li class="logged-in-menu"><a href="../post/post.html">Post a Service</a></li>
+          <li class="logged-in-menu"><a href="../profile/profile.html" class="profile-button">Profile</a></li>
+          <li class="logged-in-menu"><a href="../yourservices/yourservices.html">Your Services</a></li>
+          <li class="logged-in-menu"><a href="#" id="logout-button">Logout</a></li>
+          <li class="logged-out-menu"><a href="../login/login.html" class="login-button">Login</a></li>
+        </ul>
+      </nav>
     </header>
     <main>
       <div class="login-container">
@@ -48,12 +49,13 @@
           <input type="password" id="signup_password" name="signup_password" required>
           <button type="submit" onclick="signup(event)">Sign up</button>
         </form>
-        <p>Already have an account? <a href="#" class="login-link">Login</a></p>
+        <p>Already have an account? <a class="login-link">Login</a></p>
       </div>
     </main>
     <footer>
       <p>Marketplace Website &copy; 2023</p>
     </footer>
     <script src="login.js"></script>
+    <script src="../logout/logout.js"></script>
   </body>
 </html>

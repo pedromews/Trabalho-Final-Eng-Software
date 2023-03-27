@@ -10,12 +10,13 @@
     <header>
       <nav>
         <ul>
-          <li><a href="../index/index.html" class="index-button">Home</a></li>
+          <li><a href="../index/index.html">Home</a></li>
           <li><a href="../browse/browse.html">Browse Services</a></li>
-          <li><a href="../post/post.html">Post a Service</a></li>
-          <li><a href="../login/login.html">Login</a></li>
-          <li><a href="../profile/profile.html">Profile</a></li>
-          <li><a href="../yourservices/yourservices.html">Your Services</a></li>
+          <li class="logged-in-menu"><a href="../post/post.html">Post a Service</a></li>
+          <li class="logged-in-menu"><a href="../profile/profile.html" class="profile-button">Profile</a></li>
+          <li class="logged-in-menu"><a href="../yourservices/yourservices.html">Your Services</a></li>
+          <li class="logged-in-menu"><a href="#" id="logout-button">Logout</a></li>
+          <li class="logged-out-menu"><a href="../login/login.html" class="login-button">Login</a></li>
         </ul>
       </nav>
       <div class="header-content">
@@ -45,7 +46,7 @@
     <footer>
       <p>Marketplace Website &copy; 2023</p>
     </footer>
-
     <script src="index.js"></script>
+    <script src="../logout/logout.js"></script>
   </body>
 </html>

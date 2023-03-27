@@ -16,6 +16,30 @@ const profilePicture = document.querySelector(".signup-profile-picture");
 
 let loggedInUser;
 
+// get a reference to the logged-in-menu div
+const loggedInMenu = document.querySelectorAll('.logged-in-menu');
+const loggedOutMenu = document.querySelectorAll('.logged-out-menu');
+
+if (loggedInUser) {
+  // if the user is logged in, show the logged-in-menu div
+  console.log('tava logado');
+  loggedInMenu.forEach(navElement => {
+    navElement.style.display = 'flex';
+  });
+  loggedOutMenu.forEach(navElement => {
+    navElement.style.display = 'none';
+  });
+} else {
+  // if the user is not logged in, hide the logged-in-menu div
+  console.log('nao tava logado');
+  loggedInMenu.forEach(navElement => {
+    navElement.style.display = 'none';
+  });
+  loggedOutMenu.forEach(navElement => {
+    navElement.style.display = 'flex';
+  });
+}
+
 // Add event listener to "Sign Up" link
 signupLink.addEventListener("click", () => {
   // Hide login form
@@ -31,6 +55,7 @@ loginLink.addEventListener("click", () => {
   // Show login form
   loginContainer.style.display = "block";
 });
+
 
 function signup(event) {
   let alreadyExists = false;
@@ -92,8 +117,10 @@ function signup(event) {
     });
 
     // If no matching user was found, submit the form
-    if (!alreadyExists)
+    if (!alreadyExists) {
       submitForm(formData);
+      window.location.replace('../index/index.html');
+    }
     else
     {
       loggedInUser = null;
@@ -118,7 +145,7 @@ function signup(event) {
 
     console.log("loguei no sign in");
 
-    localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+    sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
   }
 }
 
@@ -155,8 +182,10 @@ function login(event) {
         userExists = true;
         console.log("loguei no login");
         loggedInUser = user;
-        localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+        sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
         console.log(loggedInUser);
+        
+        window.location.replace('../index/index.html');
         return;
       }
     });
