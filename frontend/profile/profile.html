@@ -23,22 +23,21 @@
     <main>
       <div class="profile-header">
         <div class="profile-info">
-          <img class="profile-pic" src="profile-pic.png" alt="Profile Picture">
-          <h1>John Doe</h1>
+          <img class="profile-pic" id="profile-pic" alt="Profile Picture" crossorigin="anonymous">
+          <h1 id="full-name"></h1>
         </div>
 
 		<div class="profile-b">
 			<nav class="profile-nav">
 				<ul>
 				  <li><href="#" onclick="showSection('posts')">Posts</href></li>
-				  <li><href="#" onclick="showSection('ratings')">Ratings</href></li>
 				  <li><href="#" onclick="showSection('contacts')">Contacts</href></li>
 				</ul>
 			</nav>
 
 			<div class="balance-container">
 				<span class="balance-label">Balance:</span>
-				<span class="balance" id="balance">₣ᑕ10000</span>
+				<span class="balance" id="balance"></span>
 				<a href="../recharge/recharge.html" class="recharge-button">Recharge</a>
 			</div>
 		</div>
@@ -47,48 +46,32 @@
 
       <div class="profile-content">
 		<div id="posts" class="profile-section">
-			<h2>Posts</h2>
+			<h2>Last Posts</h2>
 			<!-- Here goes the content of the posts section -->
 			<div class="post">
-			  <h3>Offering Dog Walking Services</h3>
+			  <h3 id="title-last-post-1"></h3>
 			  <div class="post-info">
-				<p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget metus ullamcorper, finibus metus sed, laoreet quam. Sed feugiat ex vel neque posuere, ac euismod sem accumsan. Praesent eget gravida massa. Nulla facilisi. Integer efficitur velit quis ipsum hendrerit, id pharetra nibh sollicitudin.</p>
-				<p>Price: $10</p>
+				<p id="description-last-post-1"></p>
+				<p id="price-last-post-1"></p>
 			  </div>
 			  <button href="#">View Details</button>
 			</div>
 		
 			<div class="post">
-			  <h3>Looking for a Babysitter</h3>
+		      <h3 id="title-last-post-1"></h3>
 			  <div class="post-info">
-				<p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget metus ullamcorper, finibus metus sed, laoreet quam. Sed feugiat ex vel neque posuere, ac euismod sem accumsan. Praesent eget gravida massa. Nulla facilisi. Integer efficitur velit quis ipsum hendrerit, id pharetra nibh sollicitudin.</p>
-				<p>Price: $20</p>
+			    <p id="description-last-post-1"></p>
+				<p id="price-last-post-1"></p>
 			  </div>
 			  <button href="#">View Details</button>
 			</div>
 		</div>
 
-        <div id="ratings" class="profile-section" style="display:none">
-		  <h2>Ratings</h2>
-          <!-- Here goes the content of the ratings section -->
-		  <div class="rating">
-			<h3>Great Service!</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget metus ullamcorper, finibus metus sed, laoreet quam. Sed feugiat ex vel neque posuere, ac euismod sem accumsan. Praesent eget gravida massa. Nulla facilisi. Integer efficitur velit quis ipsum hendrerit, id pharetra nibh sollicitudin.</p>
-		  </div>
-	  
-		  <div class="rating">
-			<h3>Very Professional</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget metus ullamcorper, finibus metus sed, laoreet quam. Sed feugiat ex vel neque posuere, ac euismod sem accumsan. Praesent eget gravida massa. Nulla facilisi. Integer efficitur velit quis ipsum hendrerit, id pharetra nibh sollicitudin.</p>
-		  </div>
-        </div>
-
         <div id="contacts" class="profile-section" style="display:none">
-		  <h2>Contacts</h2>
+		  <h2>Contact</h2>
           <!-- Here goes the content of the contacts section -->
 		  <ul class="contact-list">
-			<li>Email: john.doe@email.com</li>
-			<li>Phone: 555-555-5555</li>
-			<li>Address: 123 Main Street, Anytown USA</li>
+			<li id="email"></li>
 		  </ul>
         </div>
       </div>

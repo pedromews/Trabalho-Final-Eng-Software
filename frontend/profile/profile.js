@@ -1,3 +1,29 @@
+let loggedInUser = localStorage.getItem('loggedInUser');
+if (loggedInUser) {
+  console.log("tem user" + loggedInUser);
+  loggedInUser = JSON.parse(loggedInUser);
+
+  document.getElementById("full-name").textContent = loggedInUser.firstName + " " + loggedInUser.lastName;
+  document.getElementById("profile-pic").src = loggedInUser.profilePicture;
+  document.getElementById("balance").textContent = loggedInUser.balance;
+
+  let lastPosts = loggedInUser.services;
+  
+  let i = 1;
+  lastPosts.slice(-2).forEach(post => {
+    document.getElementById("title-last-post-"+i).textContent = post.title;
+    document.getElementById("description-last-post-"+i).textContent = post.description;
+    document.getElementById("price-last-post-"+i).textContent = post.price;
+    i++;
+  })  
+}
+else
+{
+  console.log("não tem user" + loggedInUser);
+}
+
+
+
 function showSection(sectionName) {
   // Get all the profile sections
   let sections = document.getElementsByClassName("profile-section");

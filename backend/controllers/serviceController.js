@@ -15,7 +15,7 @@ const serviceController =
                 price: req.body.price,
                 type: req.body.type,
             };
-
+            console.log(req.body.author);
             const user = await UserModel.findOne({ username: req.body.author });
 
             if (!user) {
@@ -33,7 +33,7 @@ const serviceController =
 
             const response = await ServiceModel.create(service);
 
-            const updatedUser = await UserModel.findByIdAndUpdate(user.id, userWithUpdatedServices);
+            let updatedUser = await UserModel.findByIdAndUpdate(user.id, userWithUpdatedServices, {new:true});
 
             res.status(201).json({ updatedUser, msg: "Service created successfully" });
         }
