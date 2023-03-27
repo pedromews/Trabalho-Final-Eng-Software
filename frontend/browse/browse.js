@@ -1,17 +1,25 @@
-fetch('/api/services')
+fetch('http://localhost:8080/api/services', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
   .then(response => response.json())
   .then(services => {
     // Iterate through the services and add them to the HTML
-    const servicesContainer = document.querySelector('.services');
+    const servicesContainer = document.querySelector('.services-container');
     services.forEach(service => {
+      console.log(service);
       const serviceElement = document.createElement('div');
       serviceElement.className = 'service';
       serviceElement.innerHTML = `
-        <h3 class="service-title">${service.title}</h3>
-        <p class="service-author">${service.author}</p>
+        <div>
+          <h3 class="service-title">${service.title} •</h3>
+          <p> Service ${service.type}</p>
+        </div>
+        <p class="service-author">by ${service.author}</p>
         <p class="service-description">${service.description}</p>
         <p class="service-price">$${service.price}</p>
-        <p class="service-type">${service.type}</p>
       `;
       servicesContainer.appendChild(serviceElement);
     });

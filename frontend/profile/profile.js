@@ -22,15 +22,18 @@ if (loggedInUser) {
   document.getElementById("full-name").textContent = loggedInUser.firstName + " " + loggedInUser.lastName;
   document.getElementById("profile-pic").src = loggedInUser.profilePicture;
   document.getElementById("balance").textContent = loggedInUser.balance;
+  document.getElementById("email").textContent = loggedInUser.email;
 
   let lastPosts = loggedInUser.services;
   
   let i = 1;
   lastPosts.slice(-2).forEach(post => {
+    console.log(post);
     document.getElementById("title-last-post-"+i).textContent = post.title;
     document.getElementById("description-last-post-"+i).textContent = post.description;
     document.getElementById("price-last-post-"+i).textContent = post.price;
     i++;
+    console.log(i);
   })  
 }
 else
