@@ -5,17 +5,18 @@ const UserModel = require("../models/User");
 const serviceController =
 {
     create: async (req, res) => {
-        try {
+        try
+        {
             const service =
             {
                 title: req.body.title,
-                author: req.body.author,
+                author: "teste",
                 description: req.body.description,
                 price: req.body.price,
                 type: req.body.type,
             };
 
-            const user = await UserModel.findOne({ username: req.body.author });
+            const user = await UserModel.findOne({ username: "teste" });
 
             if (!user) {
                 res.status(404).json({ msg: "Author not found." });
@@ -37,6 +38,7 @@ const serviceController =
             res.status(201).json({ updatedUser, msg: "Service created successfully" });
         }
         catch (error) {
+            console.log("aqui");
             console.log(error);
         }
     },

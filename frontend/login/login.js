@@ -14,7 +14,7 @@ const password = document.querySelector(".signup-password");
 const profilePicture = document.querySelector(".signup-profile-picture");
 */
 
-const userID = '';
+let loggedInUser;
 
 // Add event listener to "Sign Up" link
 signupLink.addEventListener("click", () => {
@@ -33,9 +33,10 @@ loginLink.addEventListener("click", () => {
 });
 
 function signup(event) {
+  let alreadyExists = false;
+  let message = '';
   event.preventDefault();
   const form = event.target.form;
-  console.log(form); // check if form is defined
   const formData = {
     username: form.signup_username.value,
     email: form.signup_email.value,
@@ -47,6 +48,23 @@ function signup(event) {
     balance: 0
   };
 
+  if (!formData.username)
+    message += "- Username is a required field\n";
+  if (!formData.email)
+    message += "- Email is a required field\n";
+  if (!formData.password)
+    message += "- Password is a required field\n";
+  if (!formData.firstName)
+    message += "- First name is a required field\n";
+  if (!formData.lastName)
+    message += "- Last name is a required field\n";
+
+  if (message)
+  {
+    alert(message);
+    return;
+  }
+
   fetch('http://localhost:8080/api/users', {
     method: 'GET',
     headers: {
@@ -58,22 +76,35 @@ function signup(event) {
     // Loop through each user object in the array
     data.forEach(user => {
       // Check if the email or username in the form matches the ones in the database
-      if (user.email === form.signup_email.value || user.username === form.signup_username.value) {
+      if (user.email === formData.email || user.username === formData.username) {
         // Display an error message to the user
         alert("That email or username is already being used. Please try again with a different one.");
         // Clear the form inputs
         form.signup_email.value = "";
         form.signup_username.value = "";
+        alreadyExists = true;
         return;
+      }
+      else
+      {
+        loggedInUser = user;
       }
     });
 
     // If no matching user was found, submit the form
-    submitForm(formData);
+    if (!alreadyExists)
+      submitForm(formData);
+    else
+    {
+      loggedInUser = null;
+    }
+
+    console.log(loggedInUser);
   })
   .catch(error => console.error(error));
 
   function submitForm(formData) {
+    console.log("entrie");
     fetch('http://localhost:8080/api/users', {
       method: 'POST',
       headers: {
@@ -84,12 +115,29 @@ function signup(event) {
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error(error));
+
+    console.log("loguei no sign in");
+
+    sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
   }
 }
 
 function login(event) {
+  let userExists = false;
+  let message = '';
   event.preventDefault();
 
+  if (!event.target.form.username.value)
+    message += "- Username is a required field\n";
+  if (!event.target.form.password.value)
+    message += "- Password is a required field\n";
+
+  if (message)
+  {
+    alert(message);
+    return;
+  }
+  
   fetch('http://localhost:8080/api/users', {
     method: 'GET',
     headers: {
@@ -101,15 +149,20 @@ function login(event) {
     // Loop through each user object in the array
     data.forEach(user => {
       // Check if the email or username in the form matches the ones in the database
-      if (user.password === form.signup_password.value || user.username === form.signup_username.value) {
-        // Display an error message to the user
-        alert("That email or username is already being used. Please try again with a different one.");
-        // Clear the form inputs
-        form.signup_email.value = "";
-        form.signup_username.value = "";
+      if (user.password === event.target.form.password.value &&
+          user.username === event.target.form.username.value) {
+        //do something
+        userExists = true;
+        console.log("loguei no login");
+        loggedInUser = user;
+        sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+        console.log(loggedInUser);
         return;
       }
     });
+
+    if (!userExists)
+      alert("Username or password is incorrect.");
   })
   .catch(error => console.error(error));
 }
