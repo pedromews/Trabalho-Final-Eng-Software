@@ -3,14 +3,30 @@
 const form = document.getElementById('post-form');
 const successMessage = document.getElementById('success-message');
 
-let loggedInUser = localStorage.getItem('loggedInUser');
+let loggedInUser = sessionStorage.getItem('loggedInUser');
+// get a reference to the logged-in-menu div
+const loggedInMenu = document.querySelectorAll('.logged-in-menu');
+const loggedOutMenu = document.querySelectorAll('.logged-out-menu');
+
 if (loggedInUser) {
   console.log("estou parseando " + loggedInUser);
   loggedInUser = JSON.parse(loggedInUser);
+  loggedInMenu.forEach(navElement => {
+    navElement.style.display = 'flex';
+  });
+  loggedOutMenu.forEach(navElement => {
+    navElement.style.display = 'none';
+  });
 }
 else
 {
   console.log("deu ruim " + loggedInUser);
+  loggedInMenu.forEach(navElement => {
+    navElement.style.display = 'none';
+  });
+  loggedOutMenu.forEach(navElement => {
+    navElement.style.display = 'flex';
+  });
 }
 
 /*form.addEventListener('submit', (event) => {
