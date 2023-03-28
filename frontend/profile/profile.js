@@ -1,4 +1,4 @@
-let loggedInUser = localStorage.getItem('loggedInUser');
+let loggedInUser = sessionStorage.getItem('loggedInUser');
 
 // get a reference to the logged-in-menu div
 const loggedInMenu = document.querySelectorAll('.logged-in-menu');
@@ -17,7 +17,7 @@ if (loggedInUser) {
 
   //profile
   console.log("tem user" + loggedInUser);
-  loggedInUser = JSON.parse(loggedInUser);
+  loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
   document.getElementById("full-name").textContent = loggedInUser.firstName + " " + loggedInUser.lastName;
   document.getElementById("profile-pic").src = loggedInUser.profilePicture;
@@ -25,16 +25,38 @@ if (loggedInUser) {
   document.getElementById("email").textContent = loggedInUser.email;
 
   let lastPosts = loggedInUser.services;
-  
-  let i = 1;
-  lastPosts.slice(-2).forEach(post => {
-    console.log(post);
-    document.getElementById("title-last-post-"+i).textContent = post.title;
-    document.getElementById("description-last-post-"+i).textContent = post.description;
-    document.getElementById("price-last-post-"+i).textContent = post.price;
-    i++;
-    console.log(i);
-  })  
+
+
+  // Iterate through the services and add them to the HTML
+  const servicesContainer = document.querySelector('.services-container');
+
+  lastPosts.forEach(service_id => {
+    fetch('http://localhost:8080/api/services/'+service_id, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then(response => response.json())
+      .then(service => 
+        {
+          if (service.author == loggedInUser.username)
+          {
+            const serviceElement = document.createElement('div');
+            serviceElement.className = 'service';
+            serviceElement.innerHTML = `
+              <div>
+                <h3 class="service-title">${service.title} •</h3>
+                <p> Service ${service.type}</p>
+              </div>
+              <p class="service-description">${service.description}</p>
+              <p class="service-price">$${service.price}</p>
+            `;
+            servicesContainer.appendChild(serviceElement);
+          }
+        })
+      .catch(error => console.error(error));
+    });
 }
 else
 {
@@ -65,19 +87,3 @@ function showSection(sectionName) {
 
 // Show the posts section by default
 showSection("posts");
-
-
-/* Balance */
-
-function updateBalance() {
-  // Retrieve the updated balance from the database
-  let updatedBalance = 20;
-
-  // Update the balance on the screen
-  document.getElementById("balance").textContent = "₣ᑕ " + updatedBalance;
-}
-
-// Call the updateBalance function when the page is loaded
-window.onload = function() {
-  updateBalance();
-};

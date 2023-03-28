@@ -13,7 +13,7 @@ const userSchema = new Schema
         firstName: { type: String, required: true },
         lastName: { type: String, required: true },
         profilePicture: { type: String },
-        services: { type: [serviceSchema] },
+        services: { type: [String] },
         balance: { type: Number, default: 0 },
     },
 

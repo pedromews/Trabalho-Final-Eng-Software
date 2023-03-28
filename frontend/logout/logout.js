@@ -5,5 +5,5 @@ const logoutLink = document.querySelector('#logout-button');
 logoutLink.addEventListener('click', function() {
   // Clear all items from sessionStorage
   sessionStorage.clear();
-  location.reload()
+  window.location.replace('../index/index.html');
 });

@@ -110,23 +110,16 @@ function signup(event) {
         alreadyExists = true;
         return;
       }
-      else
-      {
-        loggedInUser = user;
-      }
     });
 
     // If no matching user was found, submit the form
     if (!alreadyExists) {
       submitForm(formData);
-      window.location.replace('../index/index.html');
     }
     else
     {
       loggedInUser = null;
     }
-
-    console.log(loggedInUser);
   })
   .catch(error => console.error(error));
 
@@ -140,12 +133,14 @@ function signup(event) {
       body: JSON.stringify(formData)
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => { 
+      loggedInUser = data.response;
+      console.log('aqui');
+      console.log(loggedInUser);
+      sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));  
+      window.location.replace('../index/index.html');
+    })
     .catch(error => console.error(error));
-
-    console.log("loguei no sign in");
-
-    sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
   }
 }
 

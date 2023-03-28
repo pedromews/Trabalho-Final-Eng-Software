@@ -100,7 +100,7 @@ const userController =
                 balance: req.body.balance,
             };
 
-            const updatedUser = await UserModel.findByIdAndUpdate(id, user);
+            const updatedUser = await UserModel.findByIdAndUpdate(id, user, { new: true });
             
             if (!updatedUser)
             {
@@ -108,7 +108,7 @@ const userController =
                 return;
             }
 
-            res.status(200).json({user, msg: "User updated successfully."});
+            res.status(200).json({updatedUser, msg: "User updated successfully."});
         }
         catch (error)
         {

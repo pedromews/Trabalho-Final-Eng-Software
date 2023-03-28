@@ -14,6 +14,7 @@ const serviceController =
                 description: req.body.description,
                 price: req.body.price,
                 type: req.body.type,
+                inProgress: false,
             };
             console.log(req.body.author);
             const user = await UserModel.findOne({ username: req.body.author });
@@ -23,16 +24,16 @@ const serviceController =
                 return;
             }
 
+            const response = await ServiceModel.create(service);
+            
             const services = user.services;
-            services.push(service)
-
+            services.push(response._id);
+            
             const userWithUpdatedServices =
             {
                 services: services,
             };
-
-            const response = await ServiceModel.create(service);
-
+            
             let updatedUser = await UserModel.findByIdAndUpdate(user.id, userWithUpdatedServices, {new:true});
 
             res.status(201).json({ updatedUser, msg: "Service created successfully" });
@@ -100,6 +101,7 @@ const serviceController =
                 description: req.body.description,
                 price: req.body.price,
                 type: req.body.type,
+                inProgress: req.body.inProgress,
             };
 
             const updatedService = await ServiceModel.findByIdAndUpdate(id, service);

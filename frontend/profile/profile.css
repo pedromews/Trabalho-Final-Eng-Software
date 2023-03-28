@@ -218,3 +218,51 @@ footer {
   left: 0;
   right: 0;
 }
+
+.services-container {
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.service {
+  align-self: left;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  width: 20rem;
+  padding: 1rem;
+}
+
+.service-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.service-author {
+  font-size: 0.8rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.service-description {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  height: 6rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.service-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.service-title h3, .service-type p {
+  display: inline;
+}

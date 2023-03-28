@@ -113,3 +113,17 @@ footer {
 .service-title h3, .service-type p {
   display: inline;
 }
+
+.space {
+  margin: 5rem;
+}
+
+button {
+  background-color: #2196F3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}

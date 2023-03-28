@@ -10,7 +10,7 @@ const loggedOutMenu = document.querySelectorAll('.logged-out-menu');
 
 if (loggedInUser) {
   console.log("estou parseando " + loggedInUser);
-  loggedInUser = JSON.parse(loggedInUser);
+  loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
   loggedInMenu.forEach(navElement => {
     navElement.style.display = 'flex';
   });
@@ -29,46 +29,6 @@ else
   });
 }
 
-/*form.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  const formData = new FormData(form);
-
-  fetch('/post-service', {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => {
-    if (response.ok) {
-      successMessage.classList.remove('hidden');
-
-      // add new service to homepage
-      const title = formData.get('title');
-      const description = formData.get('description');
-      const price = formData.get('price');
-      const servicesContainer = document.getElementById('services-container');
-      const newService = `
-        <div class="service">
-          <div class="service-header">
-            <h3 class="service-title">${title}</h3>
-            <p class="service-price">$${price}</p>
-          </div>
-          <div class="service-details">
-            <p class="service-description">${description}</p>
-          </div>
-        </div>
-      `;
-      servicesContainer.innerHTML += newService;
-
-    } else {
-      console.error('Server error:', response.status);
-    }
-  })
-  .catch(error => {
-    console.error('Request failed:', error);
-  });
-});*/
-
 function postService(event) {
   console.log(loggedInUser);
   event.preventDefault();
@@ -81,6 +41,7 @@ function postService(event) {
     description: form.description.value,
     price: form.price.value,
     type: form.type.value,
+    inProgress: false,
   };
 
   if (!formData.title)
@@ -108,50 +69,19 @@ function postService(event) {
       body: JSON.stringify(formData)
     })
     .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
-  }
+    .then(data => {
+      loggedInUser = data.updatedUser;
+      sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+      
+      form.title.value = '';
+      form.description.value = '';
+      form.price.value = '';
+      form.type.value = '';
 
-  /*
-  fetch('http://localhost:8080/api/users', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-  })
-  .then(response => response.json())
-  .then(data => {
-    // Loop through each user object in the array
-    data.forEach(user => {
-      // Check if the email or username in the form matches the ones in the database
-      if (user.email === form.signup_email.value || user.username === form.signup_username.value) {
-        // Display an error message to the user
-        alert("That email or username is already being used. Please try again with a different one.");
-        // Clear the form inputs
-        form.signup_email.value = "";
-        form.signup_username.value = "";
-        alreadyExists = true;
-        return;
-      }
-    });
-
-    // If no matching user was found, submit the form
-    if (!alreadyExists)
-      submitForm(formData);
-  })
-  .catch(error => console.error(error));
-
-  function submitForm(formData) {
-    console.log("entrie");
-    fetch('http://localhost:8080/api/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
+      alert('Service posted succesfully'); 
     })
-    .then(response => response.json())
-    .then(data => console.log(data))
     .catch(error => console.error(error));
-  }*/
+
+    
+  }
 }

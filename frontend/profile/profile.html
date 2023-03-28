@@ -47,25 +47,18 @@
 
       <div class="profile-content">
 		<div id="posts" class="profile-section">
-			<h2>Last Posts</h2>
-			<!-- Here goes the content of the posts section -->
-			<div class="post">
-			  <h3 id="title-last-post-1"></h3>
-			  <div class="post-info">
-				<p id="description-last-post-1"></p>
-				<p id="price-last-post-1"></p>
-			  </div>
-			  <button href="#">View Details</button>
-			</div>
-		
-			<div class="post">
-		      <h3 id="title-last-post-2"></h3>
-			  <div class="post-info">
-			    <p id="description-last-post-2"></p>
-				<p id="price-last-post-2"></p>
-			  </div>
-			  <button href="#">View Details</button>
-			</div>
+      <h2>Posts</h2>
+			<div class="services-container">
+        <script src="services.json"></script>
+        <template id="service-template">
+          <div class="service" id="service">
+            <div><h2 class="service-title"></h2><p class="service-type"></p></div>
+            <p class="service-author"></p>
+            <p class="service-description"></p>
+            <p class="service-price"></p>
+          </div>
+        </template>
+      </div>
 		</div>
 
         <div id="contacts" class="profile-section" style="display:none">
