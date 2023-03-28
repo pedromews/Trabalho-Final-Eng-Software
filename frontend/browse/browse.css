@@ -127,3 +127,39 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+/* Balance Styles */
+
+.balance-container {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.balance {
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+.balance-label {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.recharge-container {
+  display: flex;
+  align-items: center;
+}
+
+.recharge-button {
+  background-color: #2196F3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}

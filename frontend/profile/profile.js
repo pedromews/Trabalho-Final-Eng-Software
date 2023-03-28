@@ -24,8 +24,7 @@ if (loggedInUser) {
   document.getElementById("balance").textContent = loggedInUser.balance;
   document.getElementById("email").textContent = loggedInUser.email;
 
-  let lastPosts = loggedInUser.services;
-
+  let lastPosts = loggedInUser.ownServices;
 
   // Iterate through the services and add them to the HTML
   const servicesContainer = document.querySelector('.services-container');
@@ -42,6 +41,21 @@ if (loggedInUser) {
         {
           if (service.author == loggedInUser.username)
           {
+            let serviceStatus = '';
+
+            switch(service.status)
+            {
+              case 0:
+                serviceStatus = 'In catalog';
+                break;
+              case 1:
+                serviceStatus = 'In progress';
+                break;
+              case 2:
+                serviceStatus = 'Finished';
+                break;
+            }
+
             const serviceElement = document.createElement('div');
             serviceElement.className = 'service';
             serviceElement.innerHTML = `
@@ -51,6 +65,7 @@ if (loggedInUser) {
               </div>
               <p class="service-description">${service.description}</p>
               <p class="service-price">$${service.price}</p>
+              <p class="service-status">${serviceStatus}</p>
             `;
             servicesContainer.appendChild(serviceElement);
           }
@@ -69,8 +84,6 @@ else
     navElement.style.display = 'flex';
   });
 }
-
-
 
 function showSection(sectionName) {
   // Get all the profile sections

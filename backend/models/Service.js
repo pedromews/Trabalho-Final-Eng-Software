@@ -10,7 +10,8 @@ const serviceSchema = new Schema
         description: { type: String, required: true },
         price: { type: Number, required: true },
         type: { type: String, required: true },
-        inProgress: { type: Boolean, required: true },
+        status: { type: Number, required: true },
+        actor: { type: String },
     },
 
     { timestamps: true }

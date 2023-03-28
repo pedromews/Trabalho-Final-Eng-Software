@@ -14,9 +14,8 @@ const serviceController =
                 description: req.body.description,
                 price: req.body.price,
                 type: req.body.type,
-                inProgress: false,
+                status: 0,
             };
-            console.log(req.body.author);
             const user = await UserModel.findOne({ username: req.body.author });
 
             if (!user) {
@@ -26,12 +25,12 @@ const serviceController =
 
             const response = await ServiceModel.create(service);
             
-            const services = user.services;
-            services.push(response._id);
+            const ownServices = user.ownServices;
+            ownServices.push(response._id);
             
             const userWithUpdatedServices =
             {
-                services: services,
+                ownServices: ownServices,
             };
             
             let updatedUser = await UserModel.findByIdAndUpdate(user.id, userWithUpdatedServices, {new:true});
@@ -101,7 +100,8 @@ const serviceController =
                 description: req.body.description,
                 price: req.body.price,
                 type: req.body.type,
-                inProgress: req.body.inProgress,
+                status: req.body.status,
+                actor: req.body.actor,
             };
 
             const updatedService = await ServiceModel.findByIdAndUpdate(id, service);

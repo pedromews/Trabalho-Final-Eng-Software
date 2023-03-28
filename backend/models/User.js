@@ -13,7 +13,9 @@ const userSchema = new Schema
         firstName: { type: String, required: true },
         lastName: { type: String, required: true },
         profilePicture: { type: String },
-        services: { type: [String] },
+        ownServices: { type: [String] },
+        inProgressServices: { type: [String]},
+        finishedServices: { type: [String]},
         balance: { type: Number, default: 0 },
     },
 

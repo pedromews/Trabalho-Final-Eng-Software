@@ -41,7 +41,7 @@ function postService(event) {
     description: form.description.value,
     price: form.price.value,
     type: form.type.value,
-    inProgress: false,
+    status: 0,
   };
 
   if (!formData.title)
@@ -81,7 +81,5 @@ function postService(event) {
       alert('Service posted succesfully'); 
     })
     .catch(error => console.error(error));
-
-    
   }
 }

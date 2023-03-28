@@ -69,7 +69,9 @@ function signup(event) {
     firstName: form.signup_firstName.value,
     lastName: form.signup_lastName.value,
     profilePicture: form.signup_profilePicture.value,
-    services: [],
+    ownServices: [],
+    inProgressSerives: [],
+    finishedServices: [],
     balance: 0
   };
 

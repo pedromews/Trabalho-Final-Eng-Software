@@ -14,7 +14,9 @@ const userController =
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 profilePicture: req.body.profilePicture,
-                services: req.body.services,
+                ownServices: req.body.ownServices,
+                inProgressServices: req.body.inProgressServices,
+                finishedServices: req.body.finishedServices,
                 balance: req.body.balance,
             };
             
@@ -97,6 +99,9 @@ const userController =
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 profilePicture: req.body.profilePicture,
+                ownServices: req.body.ownServices,
+                inProgressServices: req.body.inProgressServices,
+                finishedServices: req.body.finishedServices,
                 balance: req.body.balance,
             };
 

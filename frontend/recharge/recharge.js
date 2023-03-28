@@ -29,6 +29,7 @@ function recharge(event) {
   const form = event.target.form;
 
   const codes = [
+    '12345',
     'xwOhl', 'ZVN9k', 'fUOQt', 'HrvJW', 'ufUuI', 'FZaPi', 'e1GIe', 'qVJsL', 'esLFm', 'BW6BC',
     's94yW', 'IDVQc', 'xVl3B', 'N5G1F', 'VVnDD', 'eWJQ1', 'W4T1k', 'VQl0m', 'x9YxX', 'om9lf'
   ];
@@ -62,8 +63,8 @@ function recharge(event) {
     console.log(data);
     loggedInUser = data.updatedUser;
     sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+    alert('Balance updated.');
+    window.location.replace('../profile/profile.html');
   })
   .catch(error => console.error(error));
-
-  alert('Balance updated.');
 }

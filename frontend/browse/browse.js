@@ -6,13 +6,18 @@ const loggedOutMenu = document.querySelectorAll('.logged-out-menu');
 
 if (loggedInUser) {
   // if the user is logged in, show the logged-in-menu div
-  console.log('tava logado');
+  console.log('tava logado' + loggedInUser);
   loggedInMenu.forEach(navElement => {
     navElement.style.display = 'flex';
   });
   loggedOutMenu.forEach(navElement => {
     navElement.style.display = 'none';
   });
+
+  loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+  
+  document.getElementById("balance").textContent = loggedInUser.balance;
+  document.querySelector('.balance-container').style.display = 'flex';
 } else {
   // if the user is not logged in, hide the logged-in-menu div
   console.log('nao tava logado');
@@ -22,7 +27,11 @@ if (loggedInUser) {
   loggedOutMenu.forEach(navElement => {
     navElement.style.display = 'flex';
   });
+
+  document.querySelector('.balance-container').style.display = 'none';
 }
+
+
 
 fetch('http://localhost:8080/api/services', {
     method: 'GET',
@@ -37,7 +46,7 @@ fetch('http://localhost:8080/api/services', {
     loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
     services.forEach(service => {
-      if ((loggedInUser == null || service.author != loggedInUser.username) && !service.inProgress)
+      if ((loggedInUser == null || service.author != loggedInUser.username) && service.status == 0)
       {
         let buttonText;
         let buttonFunction;
@@ -87,10 +96,12 @@ function requestService(event, id) {
     .then(data => {
       const formDataUser = {
         balance: Number(loggedInUser.balance) - data.price,
+        othersServices: loggedInUser.inProgressServices.push(id),
       }
       
       const formDataService = {
-        inProgress: true,
+        status: 1,
+        actor: loggedInUser._id,
       };
 
       if (formDataUser.balance < 0)
@@ -107,7 +118,10 @@ function requestService(event, id) {
         body: JSON.stringify(formDataUser)
       })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+        loggedInUser = data.updatedUser;
+        sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+      })
       .catch(error => console.error(error));
 
       fetch('http://localhost:8080/api/services/'+id, {
@@ -120,6 +134,10 @@ function requestService(event, id) {
       .then(response => response.json())
       .then(data => console.log(data))
       .catch(error => console.error(error));
+
+      const formData = {
+        balance: 25 + Number(loggedInUser.balance),
+      };
 
       location.reload()
     })
