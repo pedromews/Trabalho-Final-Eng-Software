@@ -38,6 +38,7 @@ function postService(event) {
   const formData = {
     title: form.title.value,
     author: loggedInUser.username,
+    author_id: loggedInUser._id,
     description: form.description.value,
     price: form.price.value,
     type: form.type.value,

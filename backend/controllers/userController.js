@@ -47,8 +47,8 @@ const userController =
     {
         try
         {
-            const username = req.params.username;
-            const user = await UserModel.findOne(username)
+            const id = req.params.id;
+            const user = await UserModel.findById(id)
             
             if (!user)
             {

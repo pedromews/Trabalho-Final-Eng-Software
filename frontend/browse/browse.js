@@ -31,8 +31,6 @@ if (loggedInUser) {
   document.querySelector('.balance-container').style.display = 'none';
 }
 
-
-
 fetch('http://localhost:8080/api/services', {
     method: 'GET',
     headers: {
@@ -56,7 +54,7 @@ fetch('http://localhost:8080/api/services', {
         }  
         else {
           buttonFunction = 'offerService';
-          buttonText = 'Offer your services';
+          buttonText = 'Offer Hand Shakes';
         }
 
         const serviceElement = document.createElement('div');
@@ -94,9 +92,12 @@ function requestService(event, id) {
     })
     .then(response => response.json())
     .then(data => {
+      let inProgressServices = loggedInUser.inProgressServices;
+      inProgressServices.push(id);
+
       const formDataUser = {
         balance: Number(loggedInUser.balance) - data.price,
-        othersServices: loggedInUser.inProgressServices.push(id),
+        inProgressServices: inProgressServices,
       }
       
       const formDataService = {
@@ -119,6 +120,7 @@ function requestService(event, id) {
       })
       .then(response => response.json())
       .then(data => {
+        console.log(data);
         loggedInUser = data.updatedUser;
         sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
       })
@@ -135,11 +137,100 @@ function requestService(event, id) {
       .then(data => console.log(data))
       .catch(error => console.error(error));
 
-      const formData = {
-        balance: 25 + Number(loggedInUser.balance),
-      };
-
       location.reload()
+    })
+    .catch(error => console.log(error));
+  }
+  else
+  {
+    alert('You must be logged in to request a service.');
+  }
+}
+
+function offerService(event, id) {
+  event.preventDefault();
+
+  loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+
+  if (loggedInUser)
+  {
+    fetch('http://localhost:8080/api/services/'+id, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      fetch('http://localhost:8080/api/users/'+data.author_id, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then(response => response.json())
+      .then(user => {
+        const formDataServiceCreater = {
+          balance: Number(user.balance) - data.price,
+        }
+        
+        const formDataService = {
+          status: 1,
+          actor: loggedInUser._id,
+        };
+
+        let inProgressServices = loggedInUser.inProgressServices;
+        inProgressServices.push(id);
+
+        const formDataUser = {
+          inProgressServices: inProgressServices,
+        }
+
+        if (formDataServiceCreater.balance < 0)
+        {
+          alert(`${user.username}'s balance is not enough to accept Hand Shakes.`);
+          return;
+        }
+
+        fetch('http://localhost:8080/api/users/'+loggedInUser._id, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formDataUser)
+        })
+        .then(response => response.json())
+        .then(data => {
+          loggedInUser = data.updatedUser;
+          sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+        })
+        .catch(error => console.error(error));
+
+        fetch('http://localhost:8080/api/users/'+user._id, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formDataServiceCreater)
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+
+        fetch('http://localhost:8080/api/services/'+id, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formDataService)
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+
+        location.reload()
+      })
+      .catch(error => console.error(error));
     })
     .catch(error => console.log(error));
   }

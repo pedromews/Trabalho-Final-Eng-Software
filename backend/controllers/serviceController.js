@@ -11,6 +11,7 @@ const serviceController =
             {
                 title: req.body.title,
                 author: req.body.author,
+                author_id: req.body.author_id,
                 description: req.body.description,
                 price: req.body.price,
                 type: req.body.type,
@@ -97,6 +98,7 @@ const serviceController =
             {
                 title: req.body.title,
                 author: req.body.author,
+                author_id: req.body.author_id,
                 description: req.body.description,
                 price: req.body.price,
                 type: req.body.type,
@@ -104,7 +106,7 @@ const serviceController =
                 actor: req.body.actor,
             };
 
-            const updatedService = await ServiceModel.findByIdAndUpdate(id, service);
+            const updatedService = await ServiceModel.findByIdAndUpdate(id, service, { new: true });
 
             if (!updatedService) {
                 res.status(404).json({ msg: "Service not found." });
