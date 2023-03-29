@@ -4,6 +4,8 @@ let loggedInUser = sessionStorage.getItem('loggedInUser');
 const loggedInMenu = document.querySelectorAll('.logged-in-menu');
 const loggedOutMenu = document.querySelectorAll('.logged-out-menu');
 
+let serviceToBeRated;
+
 if (loggedInUser) {
   // if the user is logged in, show the logged-in-menu div
   console.log('tava logado');
@@ -15,7 +17,7 @@ if (loggedInUser) {
   });
 
   loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
-  
+  console.log('1: ' + loggedInUser._id);
   fetch('http://localhost:8080/api/users/'+loggedInUser._id, {
     method: 'GET',
     headers: {
@@ -33,6 +35,7 @@ if (loggedInUser) {
     let finishedServices = user.finishedServices;
 
     inProgressServices.forEach(service => {
+      console.log(service);
       fetch('http://localhost:8080/api/services/'+service, {
         method: 'GET',
           headers: {
@@ -50,7 +53,7 @@ if (loggedInUser) {
         }
         else
         {
-          text = `you offered Hand Shakes in ${formatDate(data.updatedAt)}`;
+          text = `you offered your services in ${formatDate(data.updatedAt)}`;
           button = ``; 
         }
         
@@ -80,6 +83,9 @@ if (loggedInUser) {
       })
       .then(response => response.json())
       .then(data => {
+        if (data.status == '0')
+          return;
+
         fetch('http://localhost:8080/api/users/'+data.actor, {
           method: 'GET',
             headers: {
@@ -128,6 +134,7 @@ if (loggedInUser) {
               </div>
               <p class="service-author">${text}</p>
               <p class="service-description">${data.description}</p>
+              <p class="service-rating">Rating: ${data.rating}</p>
             `;
 
             finishedContainer.appendChild(serviceElement);
@@ -154,7 +161,7 @@ if (loggedInUser) {
         }
         else
         {
-          text = `you offered Hand Shakes in ${formatDate(data.updatedAt)}`;
+          text = `you offered your services in ${formatDate(data.updatedAt)}`;
         }
         
         const serviceElement = document.createElement('div');
@@ -166,6 +173,7 @@ if (loggedInUser) {
           </div>
           <p class="service-author">${text}</p>
           <p class="service-description">${data.description}</p>
+          <p class="service-rating">Rating: ${data.rating}</p>
         `;
 
         finishedContainer.appendChild(serviceElement);
@@ -188,39 +196,15 @@ if (loggedInUser) {
   });
 }
 
-function finishService(event, id) {
+function finishService(event, id)
+{
   event.preventDefault();
 
   loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
-  let index = loggedInUser.inProgressServices.indexOf(id);
-  let inProgressServices = loggedInUser.inProgressServices.splice(index, 1);
-  let finishedServices = loggedInUser.finishedServices;
-  finishedServices.push(id);
-
-  const formDataUser = {
-    inProgressServices: inProgressServices,
-    finishedServices: finishedServices,
-  }
-  
   const formDataService = {
     status: 2,
-  };
-
-  fetch('http://localhost:8080/api/users/'+loggedInUser._id, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(formDataUser)
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    loggedInUser = data.updatedUser;
-    sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
-  })
-  .catch(error => console.error(error));
+  }
 
   fetch('http://localhost:8080/api/services/'+id, {
     method: 'PUT',
@@ -230,10 +214,101 @@ function finishService(event, id) {
     body: JSON.stringify(formDataService)
   })
   .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
+  .then(service => {
+    serviceToBeRated = service.updatedService;
+    sessionStorage.setItem('serviceToBeRated', JSON.stringify(serviceToBeRated)); 
 
-  location.reload()
+    let offerer_id;
+    let requester_id;
+
+    if (service.updatedService.type == 'offer')
+    {
+      offerer_id = service.updatedService.author_id;
+      requester_id = service.updatedService.actor;
+    }
+    else
+    {
+      offerer_id = service.updatedService.actor;
+      requester_id = service.updatedService.author_id;
+    }
+
+    console.log('1f: ' + offerer_id);
+    fetch('http://localhost:8080/api/users/'+offerer_id, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then(response => response.json())
+    .then(offerer => {
+      const formDataServiceOfferer = {
+        balance: Number(offerer.balance) + Number(service.updatedService.price),
+      };
+
+      console.log(formDataServiceOfferer.balance);
+
+      console.log('2f: ' + offerer_id);
+      fetch('http://localhost:8080/api/users/'+offerer_id, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formDataServiceOfferer)
+      })
+      .then(response => response.json())
+      .then(offerer2 => {
+        if (loggedInUser._id == offerer2._id)
+        {
+          loggedInUser = offerer2.updatedUser;
+          sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+        }
+        
+        console.log('3f: ' + requester_id);
+        fetch('http://localhost:8080/api/users/'+requester_id, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        })
+        .then(response => response.json())
+        .then(requester => {
+          let index = requester.inProgressServices.indexOf(id);
+          let inProgressServices = requester.inProgressServices;
+          inProgressServices.splice(index, 1);
+          let finishedServices = requester.finishedServices;
+          finishedServices.push(id);
+
+          const formDataServiceRequester = {
+            inProgressServices: inProgressServices,
+            finishedServices: finishedServices,
+          };
+
+          console.log('4f: ' + requester_id);
+          fetch('http://localhost:8080/api/users/'+requester_id, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formDataServiceRequester)
+          })
+          .then(response => response.json)
+          .then(requester2 => {
+            if (loggedInUser._id == requester2._id)
+            {
+              loggedInUser = requester2.updatedUser;
+              sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+            }
+
+            window.location.replace('../rate/rate.html');
+          })
+          .catch(error => console.log(error))
+        })
+      })
+      .catch(error => console.error(error));
+    })
+    .catch(error => console.error(error));
+  })
+  .catch(error => console.error(error));
 }
 
 function formatDate(dateString)

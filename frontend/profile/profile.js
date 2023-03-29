@@ -42,7 +42,7 @@ if (loggedInUser) {
           if (service.author == loggedInUser.username)
           {
             let serviceStatus = '';
-
+            let rating = '';
             switch(service.status)
             {
               case 0:
@@ -53,6 +53,7 @@ if (loggedInUser) {
                 break;
               case 2:
                 serviceStatus = 'Finished';
+                rating = `Rating: ${service.rating}`;
                 break;
             }
 
@@ -66,6 +67,7 @@ if (loggedInUser) {
               <p class="service-description">${service.description}</p>
               <p class="service-price">$${service.price}</p>
               <p class="service-status">${serviceStatus}</p>
+              <p class="service-rating">${rating}</p>
             `;
             servicesContainer.appendChild(serviceElement);
           }

@@ -266,3 +266,8 @@ footer {
 .service-title h3, .service-type p {
   display: inline;
 }
+
+.service-rating {
+  font-size: 1.0rem;
+}
+  

@@ -13,6 +13,7 @@ const serviceSchema = new Schema
         type: { type: String, required: true },
         status: { type: Number, required: true },
         actor: { type: String },
+        rating: { type: Number },
     },
 
     { timestamps: true }

@@ -1,4 +1,5 @@
 let loggedInUser = sessionStorage.getItem('loggedInUser');
+let searchTerm = '';
 
 // get a reference to the logged-in-menu div
 const loggedInMenu = document.querySelectorAll('.logged-in-menu');
@@ -43,8 +44,12 @@ fetch('http://localhost:8080/api/services', {
     const servicesContainer = document.querySelector('.services-container');
     loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
+    searchTerm = JSON.parse(sessionStorage.getItem('searchTerm'));
+    console.log('aqui: ' + searchTerm);
     services.forEach(service => {
-      if ((loggedInUser == null || service.author != loggedInUser.username) && service.status == 0)
+      if ((loggedInUser == null || service.author != loggedInUser.username) &&
+           service.status == 0 &&
+           (service.title.includes(searchTerm) || service.description.includes(searchTerm) || searchTerm == '' || searchTerm == null))
       {
         let buttonText;
         let buttonFunction;
@@ -54,7 +59,7 @@ fetch('http://localhost:8080/api/services', {
         }  
         else {
           buttonFunction = 'offerService';
-          buttonText = 'Offer Hand Shakes';
+          buttonText = 'Offer your services';
         }
 
         const serviceElement = document.createElement('div');
@@ -105,6 +110,7 @@ function requestService(event, id) {
         actor: loggedInUser._id,
       };
 
+      console.log(formDataUser.balance);
       if (formDataUser.balance < 0)
       {
         alert('Your balance is not enough to request this service.');
@@ -123,21 +129,21 @@ function requestService(event, id) {
         console.log(data);
         loggedInUser = data.updatedUser;
         sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+
+        fetch('http://localhost:8080/api/services/'+id, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formDataService)
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+
+        location.reload()
       })
       .catch(error => console.error(error));
-
-      fetch('http://localhost:8080/api/services/'+id, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formDataService)
-      })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error(error));
-
-      location.reload()
     })
     .catch(error => console.log(error));
   }
@@ -188,7 +194,7 @@ function offerService(event, id) {
 
         if (formDataServiceCreater.balance < 0)
         {
-          alert(`${user.username}'s balance is not enough to accept Hand Shakes.`);
+          alert(`${user.username}'s balance is not enough to accept your services.`);
           return;
         }
 
@@ -238,4 +244,11 @@ function offerService(event, id) {
   {
     alert('You must be logged in to request a service.');
   }
+}
+
+function searchService(event)
+{
+  event.preventDefault();
+  sessionStorage.setItem('searchTerm', JSON.stringify(event.target.form.search.value));
+  location.reload();
 }

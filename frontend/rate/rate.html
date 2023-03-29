@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Service</title>
+    <link rel="stylesheet" href="rate.css">
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="form-container">
+          <h2>Rate a Service</h2>
+          <form id="post-form">
+            <div class="form-group">
+              <label for="title">Title:</label>
+              <textarea type="text" id="title" name="title" readonly></textarea>
+            </div>
+    
+            <div class="form-group">
+              <label for="description">Description:</label>
+              <textarea id="description" name="description" rows="5" readonly></textarea>
+            </div>
+    
+            <div class="form-group">
+              <label for="user">Service provider:</label>
+              <textarea id="user" name="user" rows="5" readonly></textarea>
+            </div>
+    
+            <div class="form-group">
+              <label for="rating">Rating:</label>
+              <div class="rating">
+                <input type="radio" name="rating" value="1" id="rating-1">
+                <label for="rating-1"></label>
+                <input type="radio" name="rating" value="2" id="rating-2">
+                <label for="rating-2"></label>
+                <input type="radio" name="rating" value="3" id="rating-3">
+                <label for="rating-3"></label>
+                <input type="radio" name="rating" value="4" id="rating-4">
+                <label for="rating-4"></label>
+                <input type="radio" name="rating" value="5" id="rating-5">
+                <label for="rating-5"></label>
+              </div>
+            </div>
+    
+            <button type="submit" class="btn" onclick="sendRating(event)">Send</button>
+          </form>    
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>Marketplace Website &copy; 2023</p>
+    </footer>
+    <script src="rate.js"></script>
+  </body>
+</html>

@@ -16,6 +16,7 @@ const serviceController =
                 price: req.body.price,
                 type: req.body.type,
                 status: 0,
+                rating: 0,
             };
             const user = await UserModel.findOne({ username: req.body.author });
 
@@ -104,6 +105,7 @@ const serviceController =
                 type: req.body.type,
                 status: req.body.status,
                 actor: req.body.actor,
+                rating: req.body.rating,
             };
 
             const updatedService = await ServiceModel.findByIdAndUpdate(id, service, { new: true });
@@ -113,7 +115,7 @@ const serviceController =
                 return;
             }
 
-            res.status(200).json({ service, msg: "Service updated successfully." });
+            res.status(200).json({ updatedService, msg: "Service updated successfully." });
         }
         catch (error) {
             console.log(error);

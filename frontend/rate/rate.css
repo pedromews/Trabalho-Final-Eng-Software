@@ -1,0 +1,169 @@
+/* General Styles */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+  }
+  
+  h1, h2, h3 {
+    margin: 0;
+  }
+  
+  ul, ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+  
+  button {
+    display: block;
+    margin: 0 auto;
+    background-color: #2196F3;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0D47A1;
+  }
+  
+  /* Navigation Styles */
+  
+  nav {
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  
+  nav ul {
+    display: flex;
+  }
+  
+  nav ul li {
+    margin-right: 20px;
+  }
+  
+  nav ul li:last-child {
+    margin-right: 0;
+  }
+  
+  nav ul li a {
+    font-weight: bold;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .form-container {
+    width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    width: 96%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  textarea {
+    resize: none;
+  }
+  
+  
+  .hidden {
+    display: none;
+  }
+  
+  /* Starts */
+  
+  .rating {
+    display: inline-block;
+    flex-direction: row-reverse;
+    direction: rtl;
+    text-align: left;
+  }
+  
+  .rating input {
+    display: none;
+  }
+  
+  .rating label {
+    display: inline-block;
+    font-size: 40px;
+    color: #ccc;
+    cursor: pointer;
+  }
+  
+  .rating label:before {
+    content: "\2606";
+  }
+  
+  .rating label:hover:before,
+  .rating label:hover ~ label:before {
+    content: "\2605";
+    color: #ffcc00;
+  }
+  
+  .rating input:checked ~ label:before {
+    content: "\2605";
+    color: #ffcc00;
+  }
+  
+  .rating.disabled label:hover:before,
+  .rating.disabled label:hover ~ label:before {
+    content: "\2605";
+    color: #ccc;
+    cursor: default;
+  }
+  
+  /* Footer Styles */
+  
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 5px 0 5px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
